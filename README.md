@@ -1,11 +1,13 @@
+*This is a fork of Augmentor.jl where we intend to develop augmentation operations for audio data.*
+
 [![Augmentor](https://raw.githubusercontent.com/JuliaML/FileStorage/master/Augmentor/readme/header.png)](https://evizero.github.io/Augmentor.jl/)
 
 A **fast** Julia library for increasing the number of training
 images by applying various transformations.
 
-| **Package Status** | **Package Evaluator** | **Build Status**  |
-|:------------------:|:---------------------:|:-----------------:|
-| [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md) [![Documentation Status](https://img.shields.io/badge/docs-latest-blue.svg?style=flat)](https://evizero.github.io/Augmentor.jl/) | [![Julia Pkg 0.6](http://pkg.julialang.org/badges/Augmentor_0.6.svg)](http://pkg.julialang.org/?pkg=Augmentor) [![Julia Pkg 0.7](http://pkg.julialang.org/badges/Augmentor_0.7.svg)](http://pkg.julialang.org/?pkg=Augmentor) | [![Travis Status](https://travis-ci.org/Evizero/Augmentor.jl.svg?branch=master)](https://travis-ci.org/Evizero/Augmentor.jl) [![AppVeyor status](https://ci.appveyor.com/api/projects/status/stfgx2856r8ckskw?svg=true)](https://ci.appveyor.com/project/Evizero/augmentor-jl) [![Coverage Status](https://coveralls.io/repos/github/Evizero/Augmentor.jl/badge.svg?branch=master)](https://coveralls.io/github/Evizero/Augmentor.jl?branch=master) |
+| **Package Status** | **Build Status**  |
+|:------------------:|:-----------------:|
+| [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md) [![Documentation Status](https://img.shields.io/badge/docs-latest-blue.svg?style=flat)](https://evizero.github.io/Augmentor.jl/) | [![Travis Status](https://travis-ci.org/baggepinnen/Augmentor.jl.svg?branch=master)](https://travis-ci.org/baggepinnen/Augmentor.jl) [![Coverage Status](https://coveralls.io/repos/github/baggepinnen/Augmentor.jl/badge.svg?branch=master)](https://coveralls.io/github/baggepinnen/Augmentor.jl?branch=master) |
 
 Augmentor is a real-time image augmentation library designed to
 render the process of artificial dataset enlargement more
@@ -298,14 +300,14 @@ on `augment` within Julia's REPL:
 
 ## Installation
 
-To install `Augmentor.jl`, start up Julia and type the following
+To install this fork of `Augmentor.jl`, start up Julia and type the following
 code snipped into the REPL. It makes use of the native Julia
 package manager. Once installed the Augmentor package can be
 imported just as any other Julia package.
 
 ```julia
 import Pkg
-Pkg.add("Augmentor")
+Pkg.add("https://github.com/baggepinnen/Augmentor.jl")
 using Augmentor
 ```
 
@@ -334,8 +336,3 @@ file.
 - [JuliaImages/ImageTransformations.jl](https://github.com/JuliaImages/ImageTransformations.jl)
 - [JuliaMath/Interpolations.jl](https://github.com/JuliaMath/Interpolations.jl)
 - [JuliaArrays/IdentityRanges.jl](https://github.com/JuliaArrays/IdentityRanges.jl)
-
-Note that this version `Augmentor.jl` is a complete rewrite of an
-initial implementation that had the same name. The old
-implementation is now located at
-[AugmentorDeprecated.jl](https://github.com/Evizero/AugmentorDeprecated.jl).
