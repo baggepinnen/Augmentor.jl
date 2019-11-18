@@ -41,8 +41,8 @@ info("Preparing the MNIST dataset") #jl-only
 #'   Machine Learning datasets. This will help us prepare the
 #'   MNIST data to be used with Knet.jl.
 
-using Images, MLDatasets, MLDataUtils
-srand(42);
+using Images, MLDatasets, MLDataUtils, Random
+Random.seed!(42);
 #md nothing # hide
 
 #' As you may have seen previously in the
@@ -212,7 +212,7 @@ end
 #' to which computation node of our network.
 
 function weights(atype = KnetArray{Float32})
-    w = Array{Any}(8)
+    w = Array{Any}(undef, 8)
     # conv1
     w[1] = xavier(5,5,1,20)
     w[2] = zeros(1,1,20,1)
@@ -269,7 +269,7 @@ function train_baseline(; epochs = 500, batchsize = 100, lr = .03)
             train = acc(w, train_x, train_y)
             test  = acc(w, test_x,  test_y)
             @trace log epoch train test
-            msg = "epoch " * lpad(epoch,4) * ": train accuracy " * rpad(round(train,3),5,"0") * ", test accuracy " * rpad(round(test,3),5,"0")
+            msg = "epoch " * lpad(epoch,4) * ": train accuracy " * rpad(round(train, digits=3),5,"0") * ", test accuracy " * rpad(round(test,digits=3),5,"0")
             cancel(p, msg, :blue) #jl-only
 #md             println(msg)
 #jp             println(msg)
@@ -417,7 +417,7 @@ function train_augmented(; epochs = 500, batchsize = 100, lr = .03)
             train = acc(w, train_x, train_y)
             test  = acc(w, test_x,  test_y)
             @trace log epoch train test
-            msg = "epoch " * lpad(epoch,4) * ": train accuracy " * rpad(round(train,3),5,"0") * ", test accuracy " * rpad(round(test,3),5,"0")
+            msg = "epoch " * lpad(epoch,4) * ": train accuracy " * rpad(round(train, digits=3),5,"0") * ", test accuracy " * rpad(round(test,digits=3),5,"0")
             cancel(p, msg, :blue) #jl-only
 #md             println(msg)
 #jp             println(msg)
@@ -470,8 +470,11 @@ info("Improving Performance") #jl-only
 #' augmenting our dataset each epoch. This worker also needs
 #' access to a couple of our packages
 
-# addprocs(1)
-# @everywhere using Augmentor, MLDataUtils
+using Distributed
+addprocs(1)
+@everywhere using Augmentor, MLDataUtils
+#md nothing # hide
+
 
 #' Next, we replace the inner `eachbatch` loop with a more
 #' complicated version using a `RemoteChannel` to exchange and
@@ -510,7 +513,7 @@ function async_train_augmented(; epochs = 500, batchsize = 100, lr = .03)
             train = acc(w, train_x, train_y)
             test  = acc(w, test_x,  test_y)
             @trace log epoch train test
-            msg = "epoch " * lpad(epoch,4) * ": train accuracy " * rpad(round(train,3),5,"0") * ", test accuracy " * rpad(round(test,3),5,"0")
+            msg = "epoch " * lpad(epoch,4) * ": train accuracy " * rpad(round(train,digits=3),5,"0") * ", test accuracy " * rpad(round(test,digits=3),5,"0")
             cancel(p, msg, :blue) #jl-only
 #md             println(msg)
 #jp             println(msg)
@@ -524,6 +527,10 @@ end
 #' Note that for this toy example the overhead of this approach
 #' is greater than the benefit.
 
+async_train_augmented(epochs=1) # warm-up
+augmented_log = @time async_train_augmented(epochs=200);
+#md nothing # hide
+
 #' ## Visualizing the Results
 info("Visualizing the Results") #jl-only
 
@@ -534,8 +541,8 @@ info("Visualizing the Results") #jl-only
 #' in order to get a good feeling about their differences.
 
 using Plots
-#jp pyplot()
-#md pyplot()
+#jp gr()
+#md gr()
 #md nothing # hide
 unicodeplots() #jl-only
 

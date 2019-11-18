@@ -3,7 +3,11 @@
     @testset "constructor" begin
         @test_throws MethodError Scale()
         @test_throws MethodError Scale(())
-        @test_throws MethodError Scale{0}(())
+
+        #@test_throws MethodError Scale{0}(())
+        # T not defined
+        @test_throws UndefVarError Scale{0}(())
+
         @test_throws MethodError Scale(:a)
         @test_throws MethodError Scale([:a])
         @test_throws ArgumentError Scale([])
@@ -65,8 +69,8 @@
         # TODO: actual content tests (maybe test_reference)
         img_out1 = @inferred Augmentor.applyeager(Scale(1.5), square2)
         img_out2 = @inferred Augmentor.applyeager(Scale(0.2), square2)
-        @test indices(img_out1) == (0:5, 0:5)
-        @test indices(img_out2) == (2:3, 2:3)
+        @test axes(img_out1) == (0:5, 0:5)
+        @test axes(img_out2) == (2:3, 2:3)
         imgs = [
             (square2),
             (view(square2, :, :)),
@@ -97,7 +101,7 @@
             # check that the affine map is computed for each image
             res1, res2 = @inferred(Augmentor.applyeager(Scale(1.5), (square, OffsetArray(square,-5,-5))))
             @test collect(res1) == collect(res2)
-            @test indices(res1) != indices(res2)
+            @test axes(res1) != axes(res2)
         end
         @testset "random parameter" begin
             for img_in in imgs
