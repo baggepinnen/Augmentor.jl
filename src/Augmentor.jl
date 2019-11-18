@@ -16,6 +16,7 @@ using ComputationalResources
 using FileIO
 using LinearAlgebra
 using Base.PermutedDimsArrays: PermutedDimsArray
+using DSP
 
 export
 
@@ -63,6 +64,7 @@ export
     ElasticDistortion,
 
     Amplify,
+    LinearFilter,
 
     augment,
     augment!,

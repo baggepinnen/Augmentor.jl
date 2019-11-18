@@ -1,5 +1,6 @@
 using   ColorTypes,
         CoordinateTransformations,
+        DSP,
         FixedPointNumbers,
         IdentityRanges,
         ImageCore,
