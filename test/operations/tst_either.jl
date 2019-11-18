@@ -3,7 +3,7 @@
 # [x] Construction also works for ops like ElasticDistortion
 
 @test (Either <: Augmentor.AffineOperation) == false
-@test Either <: Augmentor.ImageOperation
+@test Either <: Augmentor.ArrayOperation
 
 @testset "constructor" begin
     @test_throws ArgumentError Either()

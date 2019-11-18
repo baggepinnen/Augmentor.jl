@@ -51,7 +51,6 @@ rgb_rect = rand(RGB{N0f8}, 2, 3)
 ##
 tests = [
     "tst_utils.jl",
-    "operations/tst_simpleaudio.jl",
     "operations/tst_channels.jl",
     "operations/tst_dims.jl",
     "operations/tst_convert.jl",

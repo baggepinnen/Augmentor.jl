@@ -63,9 +63,6 @@ export
 
     ElasticDistortion,
 
-    Amplify,
-    LinearFilter,
-
     augment,
     augment!,
     augmentbatch!,
@@ -91,7 +88,6 @@ include("operations/resize.jl")
 include("operations/scale.jl")
 include("operations/zoom.jl")
 include("operations/either.jl")
-include("operations/simple_audio.jl")
 
 include("distortionfields.jl")
 include("distortedview.jl")

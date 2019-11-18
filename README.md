@@ -1,5 +1,3 @@
-*This is a fork of Augmentor.jl where we intend to develop augmentation operations for audio data.*
-
 [![Augmentor](https://raw.githubusercontent.com/JuliaML/FileStorage/master/Augmentor/readme/header.png)](https://evizero.github.io/Augmentor.jl/)
 
 A **fast** Julia library for increasing the number of training
