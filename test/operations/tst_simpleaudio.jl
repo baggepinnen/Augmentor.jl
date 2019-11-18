@@ -9,25 +9,25 @@
         @test_throws MethodError Augmentor.applyeager(Amplify(2), nothing)
         @test Augmentor.supports_eager(Amplify) === true
         res1 = rect .* 2
-        imgs = [
+        sigs = [
             (rect, res1),
             (OffsetArray(rect, -2, -1), res1),
             (view(rect, IdentityRange(1:2), IdentityRange(1:3)), res1),
         ]
         @testset "single image" begin
-            for (img_in, img_out) in imgs
-                res = @inferred(Augmentor.applyeager(Amplify(2), img_in))
-                @test res == img_out
-                @test typeof(res) == typeof(img_out)
+            for (sig_in, sig_out) in sigs
+                res = @inferred(Augmentor.applyeager(Amplify(2), sig_in))
+                @test res == sig_out
+                @test typeof(res) == typeof(sig_out)
             end
         end
         @testset "multiple images" begin
-            for (img_in1, img_out1) in imgs, (img_in2, img_out2) in imgs
-                img_in = (img_in1, img_in2)
-                img_out = (img_out1, img_out2)
-                res = @inferred(Augmentor.applyeager(Amplify(2), img_in))
-                @test res == img_out
-                @test typeof(res) == typeof(img_out)
+            for (sig_in1, sig_out1) in sigs, (sig_in2, sig_out2) in sigs
+                sig_in = (sig_in1, sig_in2)
+                sig_out = (sig_out1, sig_out2)
+                res = @inferred(Augmentor.applyeager(Amplify(2), sig_in))
+                @test res == sig_out
+                @test typeof(res) == typeof(sig_out)
             end
         end
     end
@@ -39,8 +39,8 @@
             @test typeof(v) <: MappedArrays.ReadonlyMappedArray
         end
         @testset "multiple images" begin
-            img_in = (rgb_rect, square)
-            res1, res2 = @inferred(Augmentor.applylazy(Amplify(2), img_in))
+            sig_in = (rgb_rect, square)
+            res1, res2 = @inferred(Augmentor.applylazy(Amplify(2), sig_in))
             @test res1 == 2 .* rgb_rect
             @test res2 == 2 .* square
             @test typeof(res1) <: ReadonlyMappedArray
