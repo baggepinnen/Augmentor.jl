@@ -7,12 +7,12 @@
     @test tp == tp2
 end
 
-@testset "rand_mutex" begin
-    mutex = Augmentor.rand_mutex[]
-    typeof(mutex) <: Threads.Mutex
-    # check that its not a null pointer
-    @test reinterpret(Int, mutex.handle) > 0
-end
+# @testset "rand_mutex" begin
+#     mutex = Augmentor.rand_mutex[]
+#     typeof(mutex) <: Threads.Mutex
+#     # check that its not a null pointer
+#     @test reinterpret(Int, mutex.handle) > 0
+# end
 
 @testset "safe_rand" begin
     num = @inferred Augmentor.safe_rand()

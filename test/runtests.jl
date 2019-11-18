@@ -47,10 +47,9 @@ rgb_rect = rand(RGB{N0f8}, 2, 3)
 # to be removed
 # cd(joinpath(dirname(pathof(Augmentor)), "..", "test"))
 #################
-
+##
 tests = [
     "tst_utils.jl",
-
     "operations/tst_channels.jl",
     "operations/tst_dims.jl",
     "operations/tst_convert.jl",
@@ -65,7 +64,7 @@ tests = [
     "operations/tst_scale.jl",
     "operations/tst_zoom.jl",
     "operations/tst_distortions.jl",
-    "operations/tst_either.jl",
+    "operations/tst_either.jl", # Bugs left
     "tst_operations.jl",
     "tst_pipeline.jl",
     "tst_augment.jl",
@@ -73,8 +72,13 @@ tests = [
     "tst_distortedview.jl",
 ]
 
-for t in tests
-    @testset "$t" begin
-        include(t)
+
+@testset "Augmentor" begin
+    @info "Testing Augmentor"
+
+    for t in tests
+        @testset "$t" begin
+            include(t)
+        end
     end
 end

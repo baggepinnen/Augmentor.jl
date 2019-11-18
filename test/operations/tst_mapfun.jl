@@ -79,8 +79,8 @@ end
         @test_throws MethodError AggregateThenMapFun(x->x)
         @test typeof(@inferred(AggregateThenMapFun(x->x, x->x))) <: AggregateThenMapFun <: Augmentor.Operation
         @test typeof(@inferred(AggregateThenMapFun(mean, identity))) <: AggregateThenMapFun <: Augmentor.Operation
-        @test str_show(AggregateThenMapFun(mean, identity)) == "Augmentor.AggregateThenMapFun(Statistics.mean, identity)"
-        @test str_showconst(AggregateThenMapFun(mean, identity)) == "AggregateThenMapFun(Statistics.mean, identity)"
+        @test str_show(AggregateThenMapFun(mean, identity)) == "Augmentor.AggregateThenMapFun(mean, identity)"
+        @test str_showconst(AggregateThenMapFun(mean, identity)) == "AggregateThenMapFun(mean, identity)"
         @test str_showcompact(AggregateThenMapFun(mean, identity)) == "Map result of \"mean\" using \"identity\" over image"
     end
     @testset "eager" begin
