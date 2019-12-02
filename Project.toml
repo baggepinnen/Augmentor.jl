@@ -1,5 +1,6 @@
 name = "Augmentor"
 uuid = "0612f1b9-51e2-5127-9fc2-313c368ba66d"
+version = "0.1.0"
 
 [deps]
 ColorTypes = "3da002f7-5984-5a60-b8a6-cbb66c0b333f"
